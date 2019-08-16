@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath('com.lacritz:test-plugin:1.0-SNAPSHOT')
+    }
+}
+
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'idea'
+    id 'maven-publish'
+}
+
+apply plugin: 'test-publish'
+
+group 'com.lacritz'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = "test-publish"
+            implementationClass = "test.TestPlugin"
+        }
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task myTest {
+
+}
